@@ -1,6 +1,7 @@
 // Output a prompt
-var commands = require('./commands.js')
-process.stdout.write('prompt > ');
+var chalk = require('chalk');
+var commands = require('./commands.js');
+process.stdout.write(chalk.yellow('prompt > '));
 
 // The stdin 'data' event fires after a user types in a line
 process.stdin.on('data', function (data) {
@@ -12,9 +13,9 @@ process.stdin.on('data', function (data) {
     commands[cmd](input);
   }
   else {
-    process.stdout.write('You typed: ' + cmd);
+    process.stdout.write(chalk.green('You typed: ' + cmd));
   }
 
-  process.stdout.write('\nprompt > ');
+  process.stdout.write(chalk.yellow('\nprompt > '));
 
 });
