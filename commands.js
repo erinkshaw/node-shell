@@ -1,32 +1,21 @@
+var fs = require('fs');
 
-// var exports = module.exports = {
-//     pwd: process.stdin.on('data', function (data) {
-//         var cmd = data.toString().trim(); // remove the newline
+exports.pwd = function()  {
+    process.stdout.write(process.cwd());
+}
 
-//         if (cmd === 'pwd') {
-//             process.stdout.write(process.cwd());
-//         }
-//         process.stdout.write('\nprompt > ');
+exports.date = function() {
+    var dateNow = new Date();
+    process.stdout.write(dateNow.toString());
+}
 
-//     })
-// }
+exports.ls = function() {
+    var path = process.cwd();
+    var files = fs.readdirSync(path)
+    process.stdout.write(files.join('\n'));
+}
 
-exports.pwd = process.stdin.on('data', function (data) {
-    var cmd = data.toString().trim(); // remove the newline
-
-    if (cmd === 'pwd') {
-        process.stdout.write(process.cwd());
-    }
-    process.stdout.write('\nprompt > ');
-})
-
-exports.date = process.stdin.on('data', function (data) {
-    var cmd = data.toString().trim(); // remove the newline
-
-    if (cmd === 'date') {
-        var dateNow = new Date();
-        process.stdout.write(dateNow.toString());
-    }
-    process.stdout.write('\nprompt > ');
-})
-
+exports.echo = function(args) {
+    var print = args.join(' ').trim();
+    process.stdout.write(print);
+}
