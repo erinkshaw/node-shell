@@ -17,5 +17,11 @@ exports.ls = function() {
 
 exports.echo = function(args) {
     var print = args.join(' ').trim();
-    process.stdout.write(print);
+    var env = process.env[print.slice(1)]
+
+    if (print[0] === '$'){
+        process.stdout.write(env)
+    } else {
+        process.stdout.write(print);
+    }
 }
